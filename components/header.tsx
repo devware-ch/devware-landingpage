@@ -21,14 +21,16 @@ export const Header = () => {
       <header
         className={cn(
           "relative w-[800px] h-12 flex items-center justify-between px-8 rounded-2xl",
-          "bg-black/75 backdrop-blur-md",
-          scrolled ? "shadow-lg shadow-black/20" : "shadow-md shadow-black/10"
+          "bg-white/60 backdrop-blur-md border border-white/20",
+          scrolled 
+            ? "shadow-[0_8px_32px_-8px_rgba(0,0,0,0.12)] ring-[0.5px] ring-black/5" 
+            : "shadow-[0_4px_16px_-4px_rgba(0,0,0,0.1)]"
         )}
       >
         {/* Logo */}
         <Link 
           href="/"
-          className="relative z-10 text-lg font-bold tracking-tight text-white/90 hover:text-white transition-colors"
+          className="relative z-10 text-lg font-bold tracking-tight text-gray-800 hover:text-gray-600 transition-colors"
         >
           Devware.
         </Link>
@@ -38,13 +40,13 @@ export const Header = () => {
           <div className="flex gap-8 text-sm font-medium">
             <Link 
               href="/about"
-              className="text-white/75 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Über uns
             </Link>
             <Link 
               href="/contact"
-              className="text-white/75 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Kontakt
             </Link>
