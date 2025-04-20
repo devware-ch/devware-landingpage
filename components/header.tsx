@@ -17,10 +17,10 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="fixed top-6 left-0 right-0 flex justify-center z-50">
+    <div className="fixed top-6 left-0 right-0 flex justify-center z-50 px-4 md:px-0">
       <header
         className={cn(
-          "relative w-[800px] h-12 flex items-center justify-between px-8 rounded-2xl",
+          "relative w-full md:w-[800px] h-12 flex items-center justify-between px-8 rounded-2xl",
           "bg-white/60 backdrop-blur-md border border-white/20",
           scrolled 
             ? "shadow-[0_8px_32px_-8px_rgba(0,0,0,0.12)] ring-[0.5px] ring-black/5" 
