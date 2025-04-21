@@ -35,9 +35,9 @@ export default function Home() {
   
   const { scrollYProgress } = useScroll({
     target: aboutRef,
-    offset: isDesktop 
+    offset: isDesktop
       ? ["start 40%", "start -20%"]
-      : ["start 45%", "start -45%"]
+      : ["start 35%", "start -55%"]
   });
 
   const textColor = useTransform(
@@ -64,21 +64,8 @@ export default function Home() {
     );
   };
 
-  // Debugging-Komponente für Entwicklung
-  const ScrollIndicator = () => {
-    const scaleX = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-    
-    return (
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-50"
-        style={{ scaleX }}
-      />
-    );
-  };
-
   return (
     <main className="relative">
-      {process.env.NODE_ENV === 'development' && <ScrollIndicator />}
       <AuroraBackground className="min-h-screen">
         <div className="relative pt-40 md:pt-48 px-4 pb-24 max-w-[1400px] mx-auto">
           {/* Hero Title */}
@@ -408,6 +395,42 @@ export default function Home() {
                   </a>
                 </motion.div>
               </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="relative z-10">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url("/images/section_background.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.15
+          }}
+        />
+        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[2px]" />
+        <section className="relative py-24 md:py-32 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col items-center mb-16 md:mb-20"
+            >
+              <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
+                FAQ
+              </span>
+              <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
+                Häufig gestellte Fragen
+              </h2>
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto">
+              {/* FAQ Inhalt wird später hinzugefügt */}
             </div>
           </div>
         </section>
