@@ -36,8 +36,8 @@ export default function Home() {
   const { scrollYProgress } = useScroll({
     target: aboutRef,
     offset: isDesktop 
-      ? ["start 65%", "start 15%"]  // Desktop offset
-      : ["start 90%", "start 40%"]  // Mobile offset - angepasst für bessere mobile Sichtbarkeit
+      ? ["start 40%", "start -20%"]
+      : ["start 60%", "start -30%"]
   });
 
   const textColor = useTransform(
@@ -46,20 +46,39 @@ export default function Home() {
     ["rgb(156 163 175)", "rgb(23 23 23)"]
   );
 
-  // Verbesserte Scroll-Animation für Text
+  // Optimierte Scroll-Animation für Text
   const createScrollAnimation = (index: number, startOffset: number = 0) => {
+    const delay = isDesktop ? 0.008 : 0.015;
+    const duration = isDesktop ? 0.012 : 0.02;
+    
     return useTransform(
       scrollYProgress,
       [
-        Math.max(0, startOffset + index * 0.012), // Reduzierte Verzögerung zwischen Wörtern
-        Math.max(0, startOffset + index * 0.012 + 0.015) // Sanfterer Übergang
+        Math.max(0, startOffset + index * delay),
+        Math.max(0, startOffset + index * delay + duration)
       ],
-      ["rgb(156 163 175)", "rgb(23 23 23)"]
+      [
+        "rgb(156 163 175)", // Startfarbe (Grau)
+        "rgb(23 23 23)" // Endfarbe (Schwarz)
+      ]
+    );
+  };
+
+  // Debugging-Komponente für Entwicklung
+  const ScrollIndicator = () => {
+    const scaleX = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    
+    return (
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-50"
+        style={{ scaleX }}
+      />
     );
   };
 
   return (
     <main className="relative">
+      {process.env.NODE_ENV === 'development' && <ScrollIndicator />}
       <AuroraBackground className="min-h-screen">
         <div className="relative pt-40 md:pt-48 px-4 pb-24 max-w-[1400px] mx-auto">
           {/* Hero Title */}
@@ -284,7 +303,7 @@ export default function Home() {
                 </h2>
               </motion.div>
 
-              <div className="space-y-12 relative">
+              <div className="space-y-12 relative pb-12 md:pb-16">
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
                   {["Unser", "Ziel", "ist", "es,", "Sie", "voranzubringen", "–", "und", "das", "beginnt", "schon", "mit", "kleinen", "Designs,", "die", "attraktiv", "und", "benutzerfreundlich", "sind."].map((word, index) => {
                     const wordProgress = createScrollAnimation(index);
@@ -303,7 +322,7 @@ export default function Home() {
 
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
                   {["Egal,", "ob", "Sie", "eine", "komplett", "neue", "Webseite,", "eine", "einfache", "App", "oder", "doch", "die", "vermeintlich", "\"komplizierte\"", "(alle", "sagen,", "sie", "sei", "komplex)", "\"Spezialsoftware\"", "Lösung", "brauchen", "–", "bei", "uns", "sind", "Sie", "genau", "richtig!"].map((word, index) => {
-                    const wordProgress = createScrollAnimation(index, 0.2); // Zweiter Absatz startet später
+                    const wordProgress = createScrollAnimation(index, isDesktop ? 0.2 : 0.25);
 
                     return (
                       <motion.span
