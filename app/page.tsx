@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Code, Palette, Rocket, Gauge, Sparkles, Target, Trophy, Fingerprint, Laptop, Zap, Bot } from "lucide-react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const services = [
   {
@@ -30,9 +31,11 @@ const services = [
 
 export default function Home() {
   const aboutRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  
   const { scrollYProgress } = useScroll({
     target: aboutRef,
-    offset: ["start 65%", "start 0%"]
+    offset: isDesktop ? ["start 65%", "start 0%"] : ["start 85%", "start 0%"]
   });
 
   const textColor = useTransform(
@@ -332,7 +335,54 @@ export default function Home() {
             </motion.div>
             
             <div className="min-h-[400px]">
-              {/* Hier kommt der Inhalt für Referenzen */}
+              <div className="max-w-[1200px] mx-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="relative cursor-pointer group"
+                >
+                  <a
+                    href="https://umbau-allrounder.ch"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative overflow-hidden rounded-[32px]"
+                  >
+                    <img
+                      src="/images/referenz1.png"
+                      alt="Umbau Allrounder Website"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    
+                    {/* Webseite besuchen Button */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-white/40 hover:scale-110 hover:bg-white/30 transition-all duration-300 flex items-center gap-2 sm:gap-3 
+                        sm:opacity-0 sm:scale-95 sm:group-hover:opacity-100 sm:group-hover:scale-100 transform-gpu">
+                        <span className="text-white text-base sm:text-lg font-medium">Webseite besuchen</span>
+                        <svg 
+                          className="w-5 h-5 sm:w-6 sm:h-6 text-white hover:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Website URL Text */}
+                    <div className="absolute bottom-8 left-10 text-white">
+                      <p className="text-2xl font-medium">umbau-allrounder.ch</p>
+                    </div>
+                  </a>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
