@@ -49,37 +49,39 @@ export default function Home() {
   return (
     <main className="relative">
       <AuroraBackground className="min-h-screen">
-        <div className="relative px-4 py-12 max-w-[1400px] mx-auto">
+        <div className="relative pt-40 md:pt-48 px-4 pb-24 max-w-[1400px] mx-auto">
           {/* Hero Title */}
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-syne text-6xl md:text-8xl font-extrabold tracking-tight leading-tight mb-20"
+            className="mb-16 md:mb-24"
           >
-            <span className="block text-black dark:text-white">IHR DESIGN &</span>
-            <div className="flex items-baseline gap-4">
-              <span className="text-[#3B82F6]">SOFTWARE</span>
-              <span className="text-black dark:text-white">PARTNER</span>
-            </div>
-          </motion.h1>
+            <h1 className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight">
+              <span className="block text-black dark:text-white mb-2">IHR DESIGN &</span>
+              <div className="flex items-baseline gap-4">
+                <span className="text-[#3B82F6]">SOFTWARE</span>
+                <span className="text-black dark:text-white">PARTNER</span>
+              </div>
+            </h1>
+          </motion.div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* First Card - Large White */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="col-span-12 lg:col-span-8"
+              className="col-span-1 lg:col-span-8"
             >
-              <div className="bg-white rounded-[32px] p-8 h-full min-h-[240px]">
+              <div className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <div className="flex items-center justify-between h-full">
-                  <p className="text-2xl font-normal text-neutral-900 max-w-[70%] leading-relaxed">
+                  <p className="text-xl md:text-2xl font-normal text-neutral-900 dark:text-white max-w-[70%] leading-relaxed">
                     Wir kreieren digitale Erlebnisse und visuelle Identitäten, die Ihre Marke zum Leben erwecken.
                   </p>
                   <div className="flex-shrink-0">
-                    <div className="bg-[#F4F4F5] rounded-[24px] p-6">
+                    <div className="bg-[#F4F4F5] dark:bg-[#1F2937] rounded-[24px] p-6">
                       <img
                         src="/images/hero1.png"
                         alt="Hero Illustration"
@@ -96,9 +98,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="col-span-12 lg:col-span-4"
+              className="col-span-1 lg:col-span-4"
             >
-              <div className="bg-[#0F1322] rounded-[32px] p-8 h-full min-h-[240px]">
+              <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Design</h3>
                 <ul className="space-y-4 text-lg text-white/90">
                   <li className="flex items-center">
@@ -122,9 +124,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="col-span-12 lg:col-span-4"
+              className="col-span-1 lg:col-span-4"
             >
-              <div className="bg-[#0F1322] rounded-[32px] p-8 h-full min-h-[240px]">
+              <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Entwicklung von</h3>
                 <ul className="space-y-4 text-lg text-white/90">
                   <li className="flex items-center">
@@ -152,18 +154,18 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="col-span-12 lg:col-span-8"
+              className="col-span-1 lg:col-span-8"
             >
-              <div className="bg-white rounded-[32px] p-8 h-full min-h-[240px]">
+              <div className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <div className="flex items-center justify-between h-full">
                   <div className="max-w-[70%]">
-                    <h3 className="text-2xl font-semibold text-neutral-900 mb-4">Über uns</h3>
-                    <p className="text-xl text-neutral-900 leading-relaxed">
+                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">Über uns</h3>
+                    <p className="text-xl text-neutral-900 dark:text-white leading-relaxed">
                       Wir entwickeln Design, Web und App Lösungen sowie individuelle Software. 🚀
                     </p>
                   </div>
                   <div className="flex-shrink-0">
-                    <div className="bg-[#F4F4F5] rounded-[24px] p-6">
+                    <div className="bg-[#F4F4F5] dark:bg-[#1F2937] rounded-[24px] p-6">
                       <img
                         src="/images/hero2.png"
                         alt="Hero Illustration"
@@ -183,12 +185,14 @@ export default function Home() {
             transition={{ delay: 0.7 }}
             className="flex justify-center mt-12"
           >
-            <button className="px-8 py-3 bg-[#0F1322] text-white rounded-full text-lg font-medium hover:scale-105 transition-transform">
+            <button className="px-8 py-3 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-105 transition-transform">
               Jetzt Kontaktieren
             </button>
           </motion.div>
         </div>
       </AuroraBackground>
+
+      {/* Services Section */}
       <div className="relative z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
         <section className="py-24 px-4">
           <motion.div
@@ -207,7 +211,8 @@ export default function Home() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}                    viewport={{ once: true }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group p-6 rounded-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-200/50 dark:border-neutral-800/50"
                   whileHover={{ y: -5 }}
