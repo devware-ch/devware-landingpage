@@ -55,11 +55,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-16 md:mb-24"
+            className="mb-8 md:mb-16"
           >
-            <h1 className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight">
-              <span className="block text-black dark:text-white mb-2">IHR DESIGN &</span>
-              <div className="flex items-baseline gap-4">
+            <h1 className="font-syne text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+              <span className="block text-black dark:text-white mb-1 sm:mb-2">IHR DESIGN &</span>
+              <div className="flex items-baseline gap-2 md:gap-4">
                 <span className="text-[#3B82F6]">SOFTWARE</span>
                 <span className="text-black dark:text-white">PARTNER</span>
               </div>
@@ -73,14 +73,16 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="col-span-1 lg:col-span-8"
+              className="col-span-1 lg:col-span-8 order-1 lg:order-1"
             >
               <div className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
-                <div className="flex items-center justify-between h-full">
-                  <p className="text-xl md:text-2xl font-normal text-neutral-900 dark:text-white max-w-[70%] leading-relaxed">
-                    Wir kreieren digitale Erlebnisse und visuelle Identitäten, die Ihre Marke zum Leben erwecken.
-                  </p>
-                  <div className="flex-shrink-0">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between h-full">
+                  <div className="order-2 lg:order-1 lg:max-w-[70%]">
+                    <p className="text-xl md:text-2xl font-normal text-neutral-900 dark:text-white leading-relaxed">
+                      Wir kreieren digitale Erlebnisse und visuelle Identitäten, die Ihre Marke zum Leben erwecken.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 mb-6 lg:mb-0 order-1 lg:order-2">
                     <div className="bg-[#F4F4F5] dark:bg-[#1F2937] rounded-[24px] p-6">
                       <img
                         src="/images/hero1.png"
@@ -98,7 +100,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="col-span-1 lg:col-span-4"
+              className="col-span-1 lg:col-span-4 order-2 lg:order-2"
             >
               <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Design</h3>
@@ -119,12 +121,40 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Third Card - Development Dark */}
+            {/* Third Card - Large White */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="col-span-1 lg:col-span-4"
+              className="col-span-1 lg:col-span-8 order-3 lg:order-4"
+            >
+              <div className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between h-full">
+                  <div className="order-2 lg:order-1 lg:max-w-[70%]">
+                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">Über uns</h3>
+                    <p className="text-xl text-neutral-900 dark:text-white leading-relaxed">
+                      Wir entwickeln Design, Web und App Lösungen sowie individuelle Software. 🚀
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 mb-6 lg:mb-0 order-1 lg:order-2">
+                    <div className="bg-[#F4F4F5] dark:bg-[#1F2937] rounded-[24px] p-6">
+                      <img
+                        src="/images/hero2.png"
+                        alt="Hero Illustration"
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Fourth Card - Development Dark */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="col-span-1 lg:col-span-4 order-4 lg:order-3"
             >
               <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Entwicklung von</h3>
@@ -146,34 +176,6 @@ export default function Home() {
                     Spezieller Software
                   </li>
                 </ul>
-              </div>
-            </motion.div>
-
-            {/* Fourth Card - Large White */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="col-span-1 lg:col-span-8"
-            >
-              <div className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
-                <div className="flex items-center justify-between h-full">
-                  <div className="max-w-[70%]">
-                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">Über uns</h3>
-                    <p className="text-xl text-neutral-900 dark:text-white leading-relaxed">
-                      Wir entwickeln Design, Web und App Lösungen sowie individuelle Software. 🚀
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0">
-                    <div className="bg-[#F4F4F5] dark:bg-[#1F2937] rounded-[24px] p-6">
-                      <img
-                        src="/images/hero2.png"
-                        alt="Hero Illustration"
-                        className="w-24 h-24 object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div>
