@@ -35,7 +35,9 @@ export default function Home() {
   
   const { scrollYProgress } = useScroll({
     target: aboutRef,
-    offset: isDesktop ? ["start 65%", "start 0%"] : ["start 85%", "start 0%"]
+    offset: isDesktop 
+      ? ["start 65%", "start 15%"]  // Desktop offset
+      : ["start 90%", "start 40%"]  // Mobile offset - angepasst für bessere mobile Sichtbarkeit
   });
 
   const textColor = useTransform(
@@ -43,6 +45,18 @@ export default function Home() {
     [0, 0.5],
     ["rgb(156 163 175)", "rgb(23 23 23)"]
   );
+
+  // Verbesserte Scroll-Animation für Text
+  const createScrollAnimation = (index: number, startOffset: number = 0) => {
+    return useTransform(
+      scrollYProgress,
+      [
+        Math.max(0, startOffset + index * 0.012), // Reduzierte Verzögerung zwischen Wörtern
+        Math.max(0, startOffset + index * 0.012 + 0.015) // Sanfterer Übergang
+      ],
+      ["rgb(156 163 175)", "rgb(23 23 23)"]
+    );
+  };
 
   return (
     <main className="relative">
@@ -273,11 +287,7 @@ export default function Home() {
               <div className="space-y-12 relative">
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
                   {["Unser", "Ziel", "ist", "es,", "Sie", "voranzubringen", "–", "und", "das", "beginnt", "schon", "mit", "kleinen", "Designs,", "die", "attraktiv", "und", "benutzerfreundlich", "sind."].map((word, index) => {
-                    const wordProgress = useTransform(
-                      scrollYProgress,
-                      [index * 0.018, index * 0.018 + 0.01],
-                      ["rgb(156 163 175)", "rgb(23 23 23)"]
-                    );
+                    const wordProgress = createScrollAnimation(index);
 
                     return (
                       <motion.span
@@ -293,11 +303,7 @@ export default function Home() {
 
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
                   {["Egal,", "ob", "Sie", "eine", "komplett", "neue", "Webseite,", "eine", "einfache", "App", "oder", "doch", "die", "vermeintlich", "\"komplizierte\"", "(alle", "sagen,", "sie", "sei", "komplex)", "\"Spezialsoftware\"", "Lösung", "brauchen", "–", "bei", "uns", "sind", "Sie", "genau", "richtig!"].map((word, index) => {
-                    const wordProgress = useTransform(
-                      scrollYProgress,
-                      [0.35 + index * 0.018, 0.35 + index * 0.018 + 0.01],
-                      ["rgb(156 163 175)", "rgb(23 23 23)"]
-                    );
+                    const wordProgress = createScrollAnimation(index, 0.2); // Zweiter Absatz startet später
 
                     return (
                       <motion.span
@@ -360,7 +366,7 @@ export default function Home() {
                       <div className="bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-white/40 hover:scale-110 hover:bg-white/30 transition-all duration-300 flex items-center gap-2 sm:gap-3 
                         sm:opacity-0 sm:scale-95 sm:group-hover:opacity-100 sm:group-hover:scale-100 transform-gpu">
                         <span className="text-white text-base sm:text-lg font-medium">Webseite besuchen</span>
-                        <svg 
+                        <svg
                           className="w-5 h-5 sm:w-6 sm:h-6 text-white hover:translate-x-1 transition-transform"
                           fill="none"
                           stroke="currentColor"
