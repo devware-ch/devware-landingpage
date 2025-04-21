@@ -37,7 +37,7 @@ export default function Home() {
     target: aboutRef,
     offset: isDesktop 
       ? ["start 40%", "start -20%"]
-      : ["start 60%", "start -30%"]
+      : ["start 45%", "start -45%"]
   });
 
   const textColor = useTransform(
