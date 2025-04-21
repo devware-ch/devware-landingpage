@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Code, Palette, Rocket, Gauge, Sparkles, Target, Trophy, Fingerprint, Laptop, Zap, Bot } from "lucide-react";
 
@@ -28,6 +29,18 @@ const services = [
 ];
 
 export default function Home() {
+  const aboutRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start 65%", "start 0%"]
+  });
+
+  const textColor = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    ["rgb(156 163 175)", "rgb(23 23 23)"]
+  );
+
   return (
     <main className="relative">
       <AuroraBackground className="min-h-screen">
@@ -86,7 +99,7 @@ export default function Home() {
             >
               <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Design</h3>
-                <ul className="space-y-4 text-lg text-white/90">
+                <ul className="space-y-4 text-lg text-white">
                   <li className="flex items-center gap-3">
                     <Fingerprint className="w-5 h-5 text-[#3B82F6]" />
                     100% einzigartig
@@ -140,7 +153,7 @@ export default function Home() {
             >
               <div className="bg-[#0F1322]/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] p-8 h-full min-h-[240px]">
                 <h3 className="text-2xl font-semibold mb-8 text-white">Entwicklung von</h3>
-                <ul className="space-y-4 text-lg text-white/90">
+                <ul className="space-y-4 text-lg text-white">
                   <li className="flex items-center gap-3">
                     <Laptop className="w-5 h-5 text-[#3B82F6]" />
                     Webseiten
@@ -170,38 +183,156 @@ export default function Home() {
             className="flex justify-center mt-32"
           >
             <button className="px-8 py-3 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-105 transition-transform">
-              Jetzt Kontaktieren
+              Jetzt kontaktieren
             </button>
           </motion.div>
         </div>
       </AuroraBackground>
 
-
-      {/* Webentwicklungs Dienstleistungen Section */}
+      {/* Webentwicklungsdienstleistungen Section */}
       <div className="relative z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
-        <section className="py-24 px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-b from-neutral-950 to-neutral-500 dark:from-neutral-50 dark:to-neutral-400">
-              Unsere Webentwicklungsdienstleistungen
-            </h2>
+        <section className="py-32 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col items-center mb-20"
+            >
+              <span className="text-sm font-medium text-[#3B82F6] mb-2">
+                UNSERE EXPERTISE
+              </span>
+              <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
+                Professionelle Webentwicklung
+              </h2>
+            </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="p-6 rounded-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-lg border border-neutral-200/50 dark:border-neutral-800/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="group relative"
                 >
-                  <div className="mb-4 text-neutral-900 dark:text-neutral-50">
-                    {service.icon}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/10 via-[#3B82F6]/10 to-[#06B6D4]/10 rounded-[32px] transform opacity-40 group-hover:opacity-100 transition-all duration-300 blur-[1px] group-hover:blur-none" />
+                  <div className="relative p-8 rounded-[32px] bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-800/50 shadow-lg group-hover:shadow-2xl transition-all duration-300 h-full transform group-hover:scale-[1.02]">
+                    <div className="mb-6 p-4 bg-[#F4F4F5] dark:bg-[#1F2937] rounded-2xl inline-block">
+                      <div className="text-[#3B82F6] transform group-hover:scale-110 transition-transform duration-200">
+                        {service.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-syne font-semibold mb-3 text-neutral-900 dark:text-white">
+                      {service.title}
+                    </h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-neutral-900 dark:text-neutral-50">
-                    {service.title}
-                  </h3>
-                  <p className="text-neutral-600 dark:text-neutral-400">
-                    {service.description}
-                  </p>
-                </div>
+                </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Über Uns Section */}
+      <div className="relative z-10">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url("/images/section_background.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.15
+          }}
+        />
+        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[2px]" />
+        <div ref={aboutRef} className="relative">
+          <section className="relative py-24 md:py-32 px-4">
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="flex flex-col items-center mb-16 md:mb-20"
+              >
+                <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
+                  ÜBER UNS
+                </span>
+                <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
+                  Unsere Mission
+                </h2>
+              </motion.div>
+
+              <div className="space-y-12 relative">
+                <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
+                  {["Unser", "Ziel", "ist", "es,", "Sie", "voranzubringen", "–", "und", "das", "beginnt", "schon", "mit", "kleinen", "Designs,", "die", "attraktiv", "und", "benutzerfreundlich", "sind."].map((word, index) => {
+                    const wordProgress = useTransform(
+                      scrollYProgress,
+                      [index * 0.018, index * 0.018 + 0.01],
+                      ["rgb(156 163 175)", "rgb(23 23 23)"]
+                    );
+
+                    return (
+                      <motion.span
+                        key={index}
+                        style={{ color: wordProgress }}
+                        className="font-spectral text-2xl md:text-4xl font-light leading-relaxed dark:text-neutral-400"
+                      >
+                        {word}{" "}
+                      </motion.span>
+                    );
+                  })}
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3">
+                  {["Egal,", "ob", "Sie", "eine", "komplett", "neue", "Webseite,", "eine", "einfache", "App", "oder", "doch", "die", "vermeintlich", "\"komplizierte\"", "(alle", "sagen,", "sie", "sei", "komplex)", "\"Spezialsoftware\"", "Lösung", "brauchen", "–", "bei", "uns", "sind", "Sie", "genau", "richtig!"].map((word, index) => {
+                    const wordProgress = useTransform(
+                      scrollYProgress,
+                      [0.35 + index * 0.018, 0.35 + index * 0.018 + 0.01],
+                      ["rgb(156 163 175)", "rgb(23 23 23)"]
+                    );
+
+                    return (
+                      <motion.span
+                        key={index}
+                        style={{ color: wordProgress }}
+                        className="font-spectral text-2xl md:text-4xl font-light leading-relaxed dark:text-neutral-400"
+                      >
+                        {word}{" "}
+                      </motion.span>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      {/* Referenzen Section */}
+      <div className="relative z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+        <section className="py-32 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col items-center mb-20"
+            >
+              <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
+                UNSERE ARBEIT
+              </span>
+              <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
+                Referenzen
+              </h2>
+            </motion.div>
+            
+            <div className="min-h-[400px]">
+              {/* Hier kommt der Inhalt für Referenzen */}
             </div>
           </div>
         </section>
