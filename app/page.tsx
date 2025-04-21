@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Code, Palette, Rocket, Gauge, Sparkles, Target, Trophy, Fingerprint, Laptop, Zap, Bot } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { Faq3 } from "@/components/ui/faq3";
 
 const services = [
   {
@@ -346,7 +347,7 @@ export default function Home() {
               </h2>
             </motion.div>
             
-            <div className="min-h-[400px]">
+            <div className="min-h-[300px]">
               <div className="max-w-[1200px] mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -419,7 +420,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col items-center mb-16 md:mb-20"
+              className="flex flex-col items-center mb-8"
             >
               <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
                 FAQ
@@ -430,7 +431,49 @@ export default function Home() {
             </motion.div>
 
             <div className="max-w-4xl mx-auto">
-              {/* FAQ Inhalt wird später hinzugefügt */}
+              <Faq3 
+                items={[
+                  {
+                    id: "faq-1",
+                    question: "Was kostet eine Softwarelösung?",
+                    answer: "Im ersten persönlichen Gespräch geben wir Ihnen eine Preisspanne, damit Sie sicherstellen können, dass es Ihren Vorstellungen entspricht. Wir bieten eine feste Projektgebühr an.\n\nDas bedeutet, Sie wissen von Anfang an genau, welche Kosten auf Sie zukommen, egal wie lange das Projekt dauert. Es gibt keine Überraschungen – Sie zahlen den vereinbarten Betrag, unabhängig von der Projektlaufzeit.\n\nDie Preise werden individuell festgelegt, basierend auf Ihren Zielen, dem Umfang der Arbeit, den geplanten Aktivitäten, den erbrachten Leistungen und dem Zeitplan des Projekts."
+                  },
+                  {
+                    id: "faq-2",
+                    question: "Wie lange dauert die Umsetzung einer Website?",
+                    answer: "Die Dauer eines Projekts wird individuell im Erstgespräch festgelegt.\n\nFür Webseiten können Sie in der Regel mit 2 Wochen für einfache Projekte und bis zu 8 Wochen für komplexe Lösungen rechnen.\n\nAndere Software- und Designlösungen können je nach Anforderungen kürzer oder länger dauern."
+                  }
+                ]}
+                supportHeading="Noch Fragen?"
+                supportDescription="Unser Team steht Ihnen für alle weiteren Fragen zur Verfügung."
+                supportButtonText="Jetzt kontaktieren"
+                supportButtonUrl="#contact"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Kontakt Section */}
+      <div className="relative z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+        <section id="contact" className="py-32 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col items-center mb-20"
+            >
+              <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
+                KONTAKT
+              </span>
+              <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
+                Kontaktieren Sie uns
+              </h2>
+            </motion.div>
+            
+            <div className="min-h-[400px]">
+              {/* Hier kommt später der Kontaktinhalt */}
             </div>
           </div>
         </section>
