@@ -70,9 +70,9 @@ export default function Home() {
       <AuroraBackground className="min-h-screen">
         <div className="relative pt-40 md:pt-48 px-4 pb-24 max-w-[1400px] mx-auto">
           {/* Hero Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="mb-8 md:mb-16"
           >
@@ -82,7 +82,7 @@ export default function Home() {
                 <span className="bg-gradient-to-r from-[#4F46E5] via-[#3B82F6] to-[#06B6D4] text-transparent bg-clip-text">SOFTWARE</span>
                 <span className="text-black dark:text-white">PARTNER</span>
               </div>
-            </h1>
+        </h1>
           </motion.div>
 
           {/* Cards Grid */}
@@ -208,7 +208,7 @@ export default function Home() {
           >
             <button className="px-8 py-3 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-105 transition-transform">
               Jetzt kontaktieren
-            </button>
+          </button>
           </motion.div>
         </div>
       </AuroraBackground>
@@ -456,25 +456,183 @@ export default function Home() {
 
       {/* Kontakt Section */}
       <div className="relative z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
-        <section id="contact" className="py-32 px-4">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-32 px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Hero Title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col items-center mb-20"
+              className="mb-16"
             >
-              <span className="text-sm font-medium text-[#3B82F6] mb-2 tracking-wider">
-                KONTAKT
-              </span>
-              <h2 className="text-2xl md:text-3xl font-syne font-bold text-neutral-900 dark:text-white text-center">
-                Kontaktieren Sie uns
-              </h2>
+              <h1 className="font-syne text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+                Jetzt zur perfekten{" "}
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+                  Webseite
+                </span>
+              </h1>
+              <p className="text-lg text-neutral-600 dark:text-neutral-300">
+                Du kannst mich unter{" "}
+                <a 
+                  href="mailto:info@devware.de" 
+                  className="text-blue-500 hover:text-blue-600 transition-colors"
+                >
+                  info@devware.de
+                </a>{" "}
+                oder per Kontaktformular erreichen. Ich antworte innerhalb von 48 Stunden.
+              </p>
             </motion.div>
-            
-            <div className="min-h-[400px]">
-              {/* Hier kommt später der Kontaktinhalt */}
-            </div>
+
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-white/80 dark:bg-[#0F1322]/80 backdrop-blur-sm rounded-[32px] p-8 md:p-12"
+            >
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                // Hier kommt später die Email-Versand Logik
+                console.log('Form submitted');
+              }} className="space-y-8">
+                {/* Name Field */}
+                <div>
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
+                    placeholder="Dein Name"
+                  />
+                </div>
+
+                {/* Email Field */}
+                <div>
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
+                    placeholder="deine@firma.de"
+                  />
+                </div>
+
+                {/* Website Field */}
+                <div>
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                    Der Link deiner jetzigen Webseite
+                  </label>
+                  <input
+                    type="url"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
+                    placeholder="Deine Webseite"
+                  />
+                </div>
+
+                {/* Two Columns Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Needs Checkboxes */}
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-4">
+                      Was genau brauchst du?
+                    </label>
+                    <div className="space-y-3">
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">Design</span>
+                      </label>
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">Software</span>
+                      </label>
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">Weiteres</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Budget Radio Buttons */}
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-4">
+                      Was für ein Budget hast du?
+                    </label>
+                    <div className="space-y-3">
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="budget"
+                          value="< 5000"
+                          className="w-5 h-5 border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">{"< 5.000€"}</span>
+                      </label>
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="budget"
+                          value="5000-10000"
+                          className="w-5 h-5 border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">5.000€ - 10.000€</span>
+                      </label>
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="budget"
+                          value="10000-20000"
+                          className="w-5 h-5 border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">10.000€ - 20.000€</span>
+                      </label>
+                      <label className="flex items-center space-x-3">
+                        <input
+                          type="radio"
+                          name="budget"
+                          value="> 20000"
+                          className="w-5 h-5 border-neutral-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">{"> 20.000€"}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Message Field */}
+                <div>
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                    Wie kann ich dir Helfen? *
+                  </label>
+                  <textarea
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
+                    placeholder="Erzähl mir etwas über dein Projekt"
+                  ></textarea>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full px-8 py-4 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-[1.02] transition-transform"
+                >
+                  Nachricht senden
+                </button>
+              </form>
+            </motion.div>
           </div>
         </section>
       </div>
