@@ -35,8 +35,8 @@ const Faq3 = ({
         <div className="mx-auto w-full max-w-3xl">
           <Accordion type="single" collapsible className="space-y-4">
             {items.map((item) => (
-              <AccordionItem 
-                key={item.id} 
+              <AccordionItem
+                key={item.id}
                 value={item.id}
                 className="bg-white/90 dark:bg-[#0F1322]/90 backdrop-blur-sm rounded-[32px] border border-neutral-200/50 dark:border-neutral-800/50 overflow-hidden transition-all duration-200 hover:shadow-lg"
               >
@@ -55,7 +55,7 @@ const Faq3 = ({
           </Accordion>
         </div>
 
-        <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center rounded-[32px] bg-neutral-200/90 dark:bg-neutral-800/90 backdrop-blur-sm p-8 text-center">
+        <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center rounded-[32px] bg-neutral-300/90 dark:bg-neutral-700/90 backdrop-blur-sm p-8 text-center">
           <div className="relative mb-6">
             <Avatar className="absolute mb-4 size-16 origin-bottom -translate-x-[60%] scale-[80%] border-2 border-neutral-200 dark:border-neutral-800 md:mb-5 bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center">
               <User2 className="size-8 text-neutral-900 dark:text-white" />
@@ -74,13 +74,11 @@ const Faq3 = ({
             {supportDescription}
           </p>
           <div className="flex w-full flex-col justify-center gap-2 sm:flex-row">
-            <Button 
-              className="bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] hover:bg-[#0F1322]/90 dark:hover:bg-white/90 rounded-full px-8" 
+            <Button
+              className="bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] hover:bg-[#0F1322]/90 dark:hover:bg-white/90 rounded-full px-8"
               asChild
             >
-              <a href={supportButtonUrl}>
-                {supportButtonText}
-              </a>
+              <a href={supportButtonUrl}>{supportButtonText}</a>
             </Button>
           </div>
         </div>
@@ -89,4 +87,4 @@ const Faq3 = ({
   );
 };
 
-export { Faq3 }; 
+export { Faq3 };
