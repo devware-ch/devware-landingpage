@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isLegalPage = ["/impressum", "/datenschutz"].includes(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +20,10 @@ export const Header = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    if (isLegalPage) {
+      window.location.href = `/#${id}`;
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });

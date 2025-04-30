@@ -2,9 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export const Footer = () => {
+  const pathname = usePathname();
+  const isLegalPage = ["/impressum", "/datenschutz"].includes(pathname);
+
   const scrollToSection = (id: string) => {
+    if (isLegalPage) {
+      window.location.href = `/#${id}`;
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
