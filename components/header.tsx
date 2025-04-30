@@ -7,17 +7,34 @@ import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
   const isLegalPage = ["/impressum", "/datenschutz"].includes(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      // Überprüfe die Scroll-Richtung
+      if (currentScrollY > lastScrollY) {
+        // Nach unten scrollen
+        setHidden(true);
+      } else {
+        // Nach oben scrollen
+        setHidden(false);
+      }
+
+      // Setze den Schatten-Effekt
+      setScrolled(currentScrollY > 20);
+
+      // Aktualisiere die letzte Scroll-Position
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const scrollToSection = (id: string) => {
     if (isLegalPage) {
@@ -31,11 +48,18 @@ export const Header = () => {
   };
 
   return (
-    <div className="fixed top-6 left-0 right-0 flex justify-center z-50 px-4 md:px-0">
+    <div
+      className={cn(
+        "fixed top-6 left-0 right-0 flex justify-center z-50 px-4 md:px-0",
+        "transition-transform duration-700 ease-in-out",
+        hidden && "-translate-y-24"
+      )}
+    >
       <header
         className={cn(
           "relative w-full md:w-[800px] h-12 flex items-center justify-between px-8 rounded-2xl",
           "bg-white/60 backdrop-blur-md border border-white/20",
+          "transition-all duration-700 ease-in-out",
           scrolled
             ? "shadow-[0_8px_32px_-8px_rgba(0,0,0,0.12)] ring-[0.5px] ring-black/5"
             : "shadow-[0_4px_16px_-4px_rgba(0,0,0,0.1)]"

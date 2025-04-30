@@ -1,9 +1,14 @@
-"use client";
-
+import { Metadata } from "next";
 import { Geist, Geist_Mono, Syne, Spectral } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "Entwicklung von Webseiten und Software in der Schweiz | devware.",
+  description:
+    "Professionelle Webentwicklung, Design und Software-Lösungen für Ihr Unternehmen in der Schweiz.",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
