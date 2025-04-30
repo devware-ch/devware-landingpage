@@ -590,11 +590,8 @@ export default function Home() {
               className="bg-white/80 dark:bg-[#0F1322]/80 backdrop-blur-sm rounded-[32px] p-8 md:p-12"
             >
               <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // Hier kommt später die Email-Versand Logik
-                  console.log("Form submitted");
-                }}
+                action="https://formspree.io/f/myzwknnq"
+                method="POST"
                 className="space-y-8"
               >
                 {/* Name Field */}
@@ -604,6 +601,7 @@ export default function Home() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
                     placeholder="Ihr Name"
@@ -617,6 +615,7 @@ export default function Home() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
                     placeholder="Ihre E-Mail"
@@ -630,6 +629,7 @@ export default function Home() {
                   </label>
                   <input
                     type="url"
+                    name="website"
                     className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
                     placeholder="Ihre Webseite"
                   />
@@ -645,6 +645,8 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
+                          name="needs[]"
+                          value="website"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
                         <span className="text-neutral-700 dark:text-neutral-300">
@@ -654,6 +656,8 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
+                          name="needs[]"
+                          value="app"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
                         <span className="text-neutral-700 dark:text-neutral-300">
@@ -663,6 +667,8 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
+                          name="needs[]"
+                          value="other"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
                         <span className="text-neutral-700 dark:text-neutral-300">
@@ -681,6 +687,7 @@ export default function Home() {
                   </label>
                   <textarea
                     required
+                    name="message"
                     rows={6}
                     className="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900 dark:text-white"
                     placeholder="Erzählen Sie uns etwas über Ihr Projekt"
