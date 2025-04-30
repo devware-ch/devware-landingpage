@@ -29,6 +29,13 @@ const Faq3 = ({
   supportButtonText,
   supportButtonUrl,
 }: Faq3Props) => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="py-8">
       <div className="container px-4">
@@ -76,9 +83,9 @@ const Faq3 = ({
           <div className="flex w-full flex-col justify-center gap-2 sm:flex-row">
             <Button
               className="bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] hover:bg-[#0F1322]/90 dark:hover:bg-white/90 rounded-full px-8"
-              asChild
+              onClick={() => scrollToSection("contact")}
             >
-              <a href={supportButtonUrl}>{supportButtonText}</a>
+              {supportButtonText}
             </Button>
           </div>
         </div>

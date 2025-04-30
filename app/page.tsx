@@ -16,6 +16,7 @@ import {
   Zap,
   Bot,
   Info,
+  Check,
 } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Faq3 } from "@/components/ui/faq3";
@@ -51,6 +52,16 @@ export default function Home() {
   const aboutRef = useRef(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,6 +103,15 @@ export default function Home() {
         "rgb(23 23 23)", // Endfarbe (Schwarz)
       ]
     );
+  };
+
+  const validateForm = (form: HTMLFormElement) => {
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+
+    return Boolean(name || email || message);
   };
 
   return (
@@ -247,7 +267,10 @@ export default function Home() {
             transition={{ delay: 0.7 }}
             className="flex justify-center mt-32"
           >
-            <button className="px-8 py-3 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-105 transition-transform">
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="px-8 py-3 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-105 transition-transform"
+            >
               Jetzt kontaktieren
             </button>
           </motion.div>
@@ -315,7 +338,7 @@ export default function Home() {
           }}
         />
         <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[2px]" />
-        <div ref={aboutRef} className="relative">
+        <div ref={aboutRef} className="relative" id="about">
           <section className="relative py-24 md:py-32 px-4">
             <div className="max-w-5xl mx-auto">
               <motion.div
@@ -566,6 +589,7 @@ export default function Home() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
+        id="contact"
       >
         <section className="relative py-32 px-4">
           <div className="max-w-4xl mx-auto">
@@ -607,7 +631,11 @@ export default function Home() {
                 method="POST"
                 className="space-y-8"
                 noValidate
-                onSubmit={(e) => {
+                onChange={(e) => {
+                  const form = e.currentTarget as HTMLFormElement;
+                  setIsFormValid(validateForm(form));
+                }}
+                onSubmit={async (e) => {
                   e.preventDefault();
                   const form = e.target as HTMLFormElement;
                   const formData = new FormData(form);
@@ -636,7 +664,40 @@ export default function Home() {
                   }
 
                   setFormError("");
-                  form.submit();
+                  setIsSubmitting(true);
+                  setIsSuccess(false);
+
+                  try {
+                    const response = await fetch(
+                      "https://formspree.io/f/myzwknnq",
+                      {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                          Accept: "application/json",
+                        },
+                      }
+                    );
+
+                    if (response.ok) {
+                      form.reset();
+                      setIsSuccess(true);
+                      // Nach 3 Sekunden zurücksetzen
+                      setTimeout(() => {
+                        setIsSuccess(false);
+                      }, 3000);
+                    } else {
+                      setFormError(
+                        "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+                      );
+                    }
+                  } catch (error) {
+                    setFormError(
+                      "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+                    );
+                  } finally {
+                    setIsSubmitting(false);
+                  }
                 }}
               >
                 {/* Name Field */}
@@ -749,9 +810,39 @@ export default function Home() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full px-8 py-4 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-[1.02] transition-transform"
+                    disabled={!isFormValid || isSubmitting || isSuccess}
+                    className="w-full px-8 py-4 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-[1.02] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden"
                   >
-                    Nachricht senden
+                    <div
+                      className={`transform transition-transform duration-300 ${
+                        isSuccess
+                          ? "-translate-y-full opacity-0"
+                          : "translate-y-0 opacity-100"
+                      }`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <span className="opacity-0">Nachricht senden</span>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-6 h-6 border-2 border-white dark:border-[#0F1322] border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        </>
+                      ) : (
+                        "Nachricht senden"
+                      )}
+                    </div>
+                    <div
+                      className={`absolute inset-0 flex items-center justify-center transform transition-transform duration-300 ${
+                        isSuccess
+                          ? "translate-y-0 opacity-100"
+                          : "translate-y-full opacity-0"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Check className="w-5 h-5" />
+                        <span>Erfolgreich gesendet</span>
+                      </div>
+                    </div>
                   </button>
                 </div>
               </form>
