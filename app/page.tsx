@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import {
   Code,
@@ -15,6 +15,7 @@ import {
   Laptop,
   Zap,
   Bot,
+  Info,
 } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Faq3 } from "@/components/ui/faq3";
@@ -49,6 +50,18 @@ const services = [
 export default function Home() {
   const aboutRef = useRef(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [formError, setFormError] = useState("");
+
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidWebsite = (website: string) => {
+    if (!website) return true; // Optional field
+    const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-./?%&=]*)?$/;
+    return urlPattern.test(website);
+  };
 
   const { scrollYProgress } = useScroll({
     target: aboutRef,
@@ -593,6 +606,38 @@ export default function Home() {
                 action="https://formspree.io/f/myzwknnq"
                 method="POST"
                 className="space-y-8"
+                noValidate
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const form = e.target as HTMLFormElement;
+                  const formData = new FormData(form);
+                  const name = formData.get("name") as string;
+                  const email = formData.get("email") as string;
+                  const message = formData.get("message") as string;
+                  const website = formData.get("website") as string;
+
+                  if (!name || !email || !message) {
+                    setFormError(
+                      "Bitte füllen Sie alle erforderlichen Felder aus."
+                    );
+                    return;
+                  }
+
+                  if (!isValidEmail(email)) {
+                    setFormError(
+                      "Bitte geben Sie eine gültige E-Mail Adresse ein."
+                    );
+                    return;
+                  }
+
+                  if (!isValidWebsite(website)) {
+                    setFormError("Bitte geben Sie eine gültige Webseite ein.");
+                    return;
+                  }
+
+                  setFormError("");
+                  form.submit();
+                }}
               >
                 {/* Name Field */}
                 <div>
@@ -645,7 +690,7 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
-                          name="needs[]"
+                          name="needs"
                           value="website"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
@@ -656,7 +701,7 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
-                          name="needs[]"
+                          name="needs"
                           value="app"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
@@ -667,7 +712,7 @@ export default function Home() {
                       <label className="flex items-center space-x-3">
                         <input
                           type="checkbox"
-                          name="needs[]"
+                          name="needs"
                           value="other"
                           className="w-5 h-5 rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
                         />
@@ -694,13 +739,21 @@ export default function Home() {
                   ></textarea>
                 </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full px-8 py-4 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-[1.02] transition-transform"
-                >
-                  Nachricht senden
-                </button>
+                <div className="space-y-2">
+                  {formError && (
+                    <div className="flex items-center gap-2 pl-1">
+                      <Info className="w-4 h-4 text-red-500" />
+                      <p className="text-sm text-red-500">{formError}</p>
+                    </div>
+                  )}
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full px-8 py-4 bg-[#0F1322] dark:bg-white text-white dark:text-[#0F1322] rounded-full text-lg font-medium hover:scale-[1.02] transition-transform"
+                  >
+                    Nachricht senden
+                  </button>
+                </div>
               </form>
             </motion.div>
           </div>
