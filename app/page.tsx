@@ -78,7 +78,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll({
     target: aboutRef,
     offset: isDesktop
-      ? ["start 40%", "start -20%"]
+      ? ["start 25%", "start -35%"]
       : ["start 35%", "start -55%"],
   });
 
