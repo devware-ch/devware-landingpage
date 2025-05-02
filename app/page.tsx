@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Faq3 } from "@/components/ui/faq3";
+import { Typewriter } from "@/components/ui/typewriter";
 
 const services = [
   {
@@ -601,9 +602,15 @@ export default function Home() {
               className="mb-16"
             >
               <h1 className="font-syne text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
-                Jetzt zur perfekten{" "}
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-                  Webseite
+                <span className="block">Jetzt zur perfekten</span>{" "}
+                <span className="inline-flex min-w-[280px] sm:min-w-[320px] md:min-w-[380px] leading-[1.3] py-[0.1em]">
+                  <Typewriter
+                    words={["Webseite", "App", "Software", "Lösung"]}
+                    className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
+                    typingSpeed={150}
+                    deletingSpeed={100}
+                    delayBetweenWords={1500}
+                  />
                 </span>
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-300">
