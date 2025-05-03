@@ -13,25 +13,25 @@ export const Header = () => {
   const isLegalPage = ["/impressum", "/datenschutz"].includes(pathname);
 
   useEffect(() => {
+    const SCROLL_THRESHOLD = 750; // px, ab wann das Verhalten aktiv wird
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Überprüfe die Scroll-Richtung
-      if (currentScrollY > lastScrollY) {
-        // Nach unten scrollen
-        setHidden(true);
+      if (currentScrollY < SCROLL_THRESHOLD) {
+        setHidden(false); // Immer sichtbar im oberen Bereich
       } else {
-        // Nach oben scrollen
-        setHidden(false);
+        // Überprüfe die Scroll-Richtung
+        if (currentScrollY > lastScrollY) {
+          setHidden(true); // Nach unten scrollen → ausblenden
+        } else {
+          setHidden(false); // Nach oben scrollen → einblenden
+        }
       }
 
       // Setze den Schatten-Effekt
       setScrolled(currentScrollY > 20);
-
-      // Aktualisiere die letzte Scroll-Position
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
